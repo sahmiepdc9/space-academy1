@@ -1,0 +1,14 @@
+[
+    {
+        "sobject": "Program__c",
+        "files": [
+            "Program__c.json"
+        ]
+    },
+    {
+        "sobject": "Cohort__c",
+        "files": [
+            "Cohort__c.json"
+        ]
+    }
+]

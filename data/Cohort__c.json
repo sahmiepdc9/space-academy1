@@ -1,0 +1,23 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Cohort__c",
+                "referenceId": "Cohort__cRef1"
+            },
+            "Name": "C12",
+            "Capacity__c": 25,
+            "Program__c": "@Program__cRef1"
+        },
+        {
+            "attributes": {
+                "type": "Cohort__c",
+                "referenceId": "Cohort__cRef2"
+            },
+            "Name": "Pilot",
+            "Start_Date__c": "2026-10-14",
+            "Capacity__c": 2,
+            "Program__c": "@Program__cRef1"
+        }
+    ]
+}

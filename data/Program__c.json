@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Program__c",
+                "referenceId": "Program__cRef1"
+            },
+            "Name": "Salesforce Developer",
+            "Active__c": true
+        }
+    ]
+}
