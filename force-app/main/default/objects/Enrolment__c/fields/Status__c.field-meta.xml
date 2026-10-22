@@ -29,6 +29,11 @@
                 <default>false</default>
                 <label>Completed</label>
             </value>
+            <value>
+                <fullName>Waitlisted</fullName>
+                <default>false</default>
+                <label>Waitlisted</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
