@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Program__c</members>
+        <members>Cohort__c</members>
+        <members>Enrolment__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>EnrollmentService</members>
+        <members>EnrollmentSelector</members>
+        <members>EnrollmentServiceTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Space_Academy_Admin</members>
+        <name>PermissionSet</name>
+    </types>
+    <version>68.0</version>
+</Package>
