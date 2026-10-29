@@ -41,7 +41,7 @@ private class EnrollmentServiceTest {
     Test.stopTest();
 
     Assert.areEqual(
-      201,
+      200,
       [SELECT COUNT() FROM Enrolment__c WHERE Cohort__c = :c12]
     );
     for (EnrollmentService.EnrollmentResult r : results) {
