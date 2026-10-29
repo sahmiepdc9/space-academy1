@@ -1,0 +1,51 @@
+name: PR validate (UAT)
+on:
+    pull_request:
+        branches: [main]
+        paths: ["force-app/**"]
+
+env:
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # full history, needed for the delta
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "24"
+
+            - name: Install Salesforce CLI + plugins
+              run: |
+                  npm install --global @salesforce/cli
+                  sf plugins install code-analyzer
+                  echo y | sf plugins install sfdx-git-delta
+
+            - name: Authenticate to UAT (JWT)
+              run: |
+                  echo "${{ secrets.SF_JWT_KEY }}" > server.key
+                  sf org login jwt --client-id "${{ secrets.SF_CLIENT_ID_UAT }}" \
+                    --jwt-key-file server.key --username "${{ secrets.SF_USERNAME_UAT }}" \
+                    --instance-url https://login.salesforce.com --alias uat
+                  rm server.key
+
+            - name: Static analysis gate
+              run: sf code-analyzer run --rule-selector Recommended --severity-threshold 2 --output-file code-analyzer.html
+
+            - name: Build delta package (only what this PR changed)
+              run: sf sgd source delta --from "origin/${{ github.base_ref }}" --to HEAD --output-dir delta
+
+            - name: Validate deploy + run local tests in UAT
+              run: |
+                  sf project deploy validate --manifest delta/package/package.xml \
+                    --target-org uat --test-level RunLocalTests --wait 30
+
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: code-analyzer-report
+                  path: code-analyzer.html
