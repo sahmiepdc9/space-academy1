@@ -37,7 +37,9 @@ jobs:
               run: sf code-analyzer run --rule-selector Recommended --severity-threshold 2 --output-file code-analyzer.html
 
             - name: Build delta package (only what this PR changed)
-              run: sf sgd source delta --from "origin/${{ github.base_ref }}" --to HEAD --output-dir delta
+              run: |
+                  mkdir -p delta
+                  sf sgd source delta --from "origin/${{ github.base_ref }}" --to HEAD --output-dir delta
 
             - name: Validate deploy + run local tests in UAT
               run: |
